@@ -1,3 +1,0 @@
-@Magic
-public class MyMoja {
-}
