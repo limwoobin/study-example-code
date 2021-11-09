@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef5fd33b-93d5-475c-8224-c210d4e12c04" name="Changes" comment="" />
+    <list default="true" id="ef5fd33b-93d5-475c-8224-c210d4e12c04" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../annotation-processor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../annotation-processor/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../annotation-processor/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/../annotation-processor/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../annotation-processor/src/main/java/Moja.java" beforeDir="false" afterPath="$PROJECT_DIR$/../annotation-processor/src/main/java/Moja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../annotation-processor/src/main/java/MyMoja.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MagicMojaProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MagicMojaProcessor.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +66,7 @@
       <updated>1636370396774</updated>
       <workItem from="1636370398196" duration="35000" />
       <workItem from="1636370553374" duration="3279000" />
+      <workItem from="1636442158406" duration="1975000" />
     </task>
     <servers />
   </component>
