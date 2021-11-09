@@ -1,4 +1,4 @@
 @Magic
 public interface Moja {
-    String pollOut();
+    String pullOut();
 }
