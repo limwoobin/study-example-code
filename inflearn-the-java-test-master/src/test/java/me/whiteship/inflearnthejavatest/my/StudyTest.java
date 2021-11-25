@@ -1,4 +1,4 @@
-package me.whiteship.inflearnthejavatest.study;
+package me.whiteship.inflearnthejavatest.my;
 
 import me.whiteship.inflearnthejavatest.domain.Study;
 import org.junit.jupiter.api.BeforeEach;
