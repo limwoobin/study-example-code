@@ -1,2 +1,0 @@
-moviebuddy/MovieBuddyApplicationTest.java
- moviebuddy.MovieBuddyApplicationTest
