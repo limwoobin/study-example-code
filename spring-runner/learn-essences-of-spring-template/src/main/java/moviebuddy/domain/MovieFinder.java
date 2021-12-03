@@ -1,24 +1,15 @@
 package moviebuddy.domain;
 
-import moviebuddy.ApplicationException;
-import moviebuddy.util.FileSystemUtils;
-
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class MovieFinder {
-    private MovieReader movieReader = new CsvMovieReader();
+    private MovieReader movieReader;
+
+    public MovieFinder(MovieReader movieReader) {
+        this.movieReader = Objects.requireNonNull(movieReader);
+    }
 
     /**
      * 저장된 영화 목록에서 감독으로 영화를 검색한다.
