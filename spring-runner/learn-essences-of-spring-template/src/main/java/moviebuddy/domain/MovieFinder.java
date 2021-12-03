@@ -3,6 +3,7 @@ package moviebuddy.domain;
 import moviebuddy.ApplicationException;
 import moviebuddy.util.FileSystemUtils;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -1,5 +1,6 @@
 package moviebuddy.domain;
 
+import javax.xml.bind.JAXBException;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  */
 public class MovieFinderTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JAXBException {
 		MovieFinder movieFinder = new MovieFinder();
 		
 		List<Movie> result = movieFinder.directedBy("Michael Bay");
