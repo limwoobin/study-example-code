@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MovieFinder {
-    private MovieReader movieReader;
+    private final MovieReader movieReader;
 
     public MovieFinder(MovieReader movieReader) {
         this.movieReader = Objects.requireNonNull(movieReader);
