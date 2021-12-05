@@ -1,6 +1,5 @@
 package moviebuddy.data;
 
-import moviebuddy.data.CsvMovieReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
