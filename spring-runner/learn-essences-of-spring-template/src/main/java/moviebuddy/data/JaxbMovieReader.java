@@ -1,8 +1,10 @@
 package moviebuddy.data;
 
 import moviebuddy.ApplicationException;
+import moviebuddy.MovieBuddyProfile;
 import moviebuddy.domain.Movie;
 import moviebuddy.domain.MovieReader;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import javax.xml.bind.JAXBContext;
@@ -16,6 +18,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Profile(MovieBuddyProfile.XML_MODE)
 @Repository
 public class JaxbMovieReader implements MovieReader {
 
