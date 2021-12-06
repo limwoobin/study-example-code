@@ -1,11 +1,16 @@
 package moviebuddy;
 
-import moviebuddy.data.CsvMovieReader;
-import moviebuddy.data.XmlMovieReader;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import moviebuddy.cache.CachingAdvice;
+import moviebuddy.domain.MovieReader;
+import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.caffeine.CaffeineCacheManager;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
-import org.springframework.core.env.Environment;
-import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 @PropertySource("/application.properties")
@@ -20,6 +25,14 @@ public class MovieBuddyFactory {
         return marshaller;
     }
 
+    @Bean
+    public CaffeineCacheManager caffeineCacheManager() {
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager();
+        cacheManager.setCaffeine(Caffeine.newBuilder().expireAfterWrite(3, TimeUnit.SECONDS));
+
+        return cacheManager;
+    }
+
     @Configuration
     static class DomainModuleConfig {
 
@@ -27,28 +40,17 @@ public class MovieBuddyFactory {
 
     @Configuration
     static class DataSourceModuleConfig {
-        private final Environment environment;
-
-        public DataSourceModuleConfig(Environment environment) {
-            this.environment = environment;
-        }
-
-        @Profile(MovieBuddyProfile.CSV_MODE)
         @Bean
-        public CsvMovieReader csvMovieReader() {
-            CsvMovieReader movieReader = new CsvMovieReader();
-//            movieReader.setMetadata(environment.getProperty("movie.metadata"));
+        @Primary
+        public ProxyFactoryBean cachingMovieReaderFactory(ApplicationContext applicationContext) {
+            MovieReader target = applicationContext.getBean(MovieReader.class);
+            CacheManager cacheManager = applicationContext.getBean(CacheManager.class);
 
-            return movieReader;
-        }
+            ProxyFactoryBean proxyFactoryBean = new ProxyFactoryBean();
+            proxyFactoryBean.setTarget(target);
+            proxyFactoryBean.addAdvice(new CachingAdvice(cacheManager));
 
-        @Profile(MovieBuddyProfile.XML_MODE)
-        @Bean
-        public XmlMovieReader xmlMovieReader(Unmarshaller unmarshaller) {
-            XmlMovieReader movieReader = new XmlMovieReader(unmarshaller);
-//            movieReader.setMetadata(environment.getProperty("movie.metadata"));
-
-            return movieReader;
+            return proxyFactoryBean;
         }
     }
 }

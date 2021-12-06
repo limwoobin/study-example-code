@@ -3,6 +3,7 @@ package moviebuddy.data;
 import moviebuddy.MovieBuddyFactory;
 import moviebuddy.MovieBuddyProfile;
 import moviebuddy.domain.Movie;
+import moviebuddy.domain.MovieReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.List;
 @TestPropertySource(properties = "movie.metadata=movie_metadata.xml")
 public class XmlMovieReaderTest {
     @Autowired
-    XmlMovieReader movieReader;
+    MovieReader movieReader;
 
     @Test
     void NotEmpty_LoadedMovies() {
