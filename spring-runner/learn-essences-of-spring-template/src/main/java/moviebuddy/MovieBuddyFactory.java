@@ -2,6 +2,7 @@ package moviebuddy;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import moviebuddy.cache.CachingAdvice;
+import moviebuddy.cache.CachingAspect;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 @PropertySource("/application.properties")
 @ComponentScan
 @Import({ MovieBuddyFactory.DataSourceModuleConfig.class , MovieBuddyFactory.DataSourceModuleConfig.class })
+@EnableAspectJAutoProxy
 public class MovieBuddyFactory {
 
     @Bean
@@ -37,17 +39,8 @@ public class MovieBuddyFactory {
     }
 
     @Bean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        return new DefaultAdvisorAutoProxyCreator();
-    }
-
-    @Bean
-    public Advisor cachingAdvisor(CacheManager cacheManager) {
-        AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(null , CacheResult.class);
-        Advice advice = new CachingAdvice(cacheManager);
-
-        // Advisor = PointCut + Advice
-        return new DefaultPointcutAdvisor(pointcut , advice);
+    public CachingAspect cachingAspect(CacheManager cacheManager) {
+        return new CachingAspect(cacheManager);
     }
 
     @Configuration
