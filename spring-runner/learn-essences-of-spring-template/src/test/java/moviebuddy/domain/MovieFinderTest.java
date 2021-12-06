@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
@@ -17,8 +15,6 @@ import java.util.List;
  * @author springrunner.kr@gmail.com
  */
 @SpringJUnitConfig(MovieBuddyFactory.class)
-//@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(classes = MovieBuddyFactory.class)
 @ActiveProfiles(MovieBuddyProfile.CSV_MODE)
 public class MovieFinderTest {
 	@Autowired
