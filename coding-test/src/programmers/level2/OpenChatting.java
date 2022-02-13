@@ -2,6 +2,10 @@ package programmers.level2;
 
 import java.util.*;
 
+/*
+* 오픈채팅방
+* https://programmers.co.kr/learn/courses/30/lessons/42888
+* */
 public class OpenChatting {
     public static void main(String[] args) {
         String[] answer = {
