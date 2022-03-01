@@ -1,9 +1,6 @@
 package programmers.level1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /*
@@ -12,8 +9,8 @@ import java.util.stream.Collectors;
 * */
 public class PuppetDraw {
     public static void main(String[] args) {
-        int board[][] = {{0,0,0,0,0},{0,0,1,0,3},{0,2,5,0,1},{4,2,4,4,2},{3,5,1,3,1}};
-        int moves[] = {1,5,3,5,1,2,1,4};
+        int[][] board = {{0,0,0,0,0},{0,0,1,0,3},{0,2,5,0,1},{4,2,4,4,2},{3,5,1,3,1}};
+        int[] moves = {1,5,3,5,1,2,1,4};
 
 
         List<List<Integer>> list = new ArrayList<>();
@@ -24,43 +21,46 @@ public class PuppetDraw {
             list.add(data);
         }
 
-        List<List<Integer>> boxs = new ArrayList<>();
-        for (int i=list.size(); i>0; i--) {
-            List<Integer> val = list.get(i);
-            for (int j=0; j>val.size(); j++) {
-                List
+        List<List<Integer>> boxes = new ArrayList<>();
+
+        for (int j=0; j<list.size(); j++) {
+            List<Integer> newList = new ArrayList<>();
+
+            for (int i=list.size(); i > 0; i--) {
+                List<Integer> val = list.get(i-1);
+
+                if (val.get(j) != 0)
+                    newList.add(val.get(j));
             }
+
+            boxes.add(newList);
         }
 
         List<Integer> result = new ArrayList<>();
 
-        for (int i : moves) {
-            List<Integer> data = list.get(i-1);
-            int lastIndex = data.size();
-            int value = data.remove(lastIndex - 1);
-
-            if (value != 0) {
-                result.add(value);
-            }
-        }
-
-        result.forEach(System.out::println);
-
         int cnt = 0;
 
-        for (int i=0; i<result.size(); i++) {
-            if (i < result.size() - 1) {
-                int target = i + 1;
-                if (Objects.equals(result.get(i), result.get(target))) {
-                    result.remove(i);
-                    result.remove(i);
-                    cnt++;
-                    cnt++;
-                }
+        for (int i : moves) {
+            List<Integer> data = boxes.get(i-1);
+            Optional<Integer> value = data.stream().findFirst();
+            if (value.isEmpty()) {
+                continue;
+            }
+
+            data.remove(value.get());
+
+            int lastIndex = result.size() == 0 ? 0 : result.get(result.size() - 1);
+
+            if (lastIndex == value.get()) {
+                result.remove(Integer.valueOf(lastIndex));
+                cnt += 2;
+            } else {
+                result.add(value.get());
             }
         }
 
-//        System.out.println("cnt: " + cnt);
-//        result.forEach(System.out::println);
+
+        result.forEach(System.out::println);
+        System.out.println("cnt: " + cnt);
     }
 }
