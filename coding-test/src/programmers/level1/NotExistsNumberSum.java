@@ -14,7 +14,7 @@ public class NotExistsNumberSum {
             list.add(i);
         }
 
-        int numbers[] = {1,2,3,4,6,7,8,0};
+        int[] numbers = {1,2,3,4,6,7,8,0};
         for (int num : numbers) {
             list.remove(Integer.valueOf(num));
         }
