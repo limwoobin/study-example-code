@@ -14,10 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OptimisticLockStockFacadeTest {
+class NamedLockStockFacadeTest {
 
     @Autowired
-    private OptimisticLockStockFacade optimisticLockStockFacade;
+    private NamedLockStockFacade namedLockStockFacade;
 
     @Autowired
     private StockRepository stockRepository;
@@ -34,18 +34,14 @@ class OptimisticLockStockFacadeTest {
     }
 
     @Test
-    public void 동시에_100개_요청_optimistic_lock() throws InterruptedException {
+    public void 동시에_100개_요청_named_lock() throws InterruptedException {
         int numberOfThreads = 100;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
 
         for (int i=0; i<numberOfThreads; i++) {
             executorService.submit(() -> {
-                try {
-                    optimisticLockStockFacade.decrease(1L, 1L);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                namedLockStockFacade.decrease(1L, 1L);
                 latch.countDown();
             });
         }
