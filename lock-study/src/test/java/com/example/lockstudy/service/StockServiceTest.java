@@ -44,7 +44,7 @@ public class StockServiceTest {
     }
 
     @Test
-    public void 동시에_100개_요청() {
+    public void 동시에_100개_요청() throws InterruptedException {
         int numberOfThreads = 100;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
@@ -56,11 +56,9 @@ public class StockServiceTest {
             });
         }
 
-        latch.countDown();
+        latch.await();
 
         Stock stock = stockRepository.findById(1L).orElseThrow();
-        System.out.println(stock.getQuantity());
-
-        assertEquals(0L, stock.getQuantity());
+        assertEquals(0, stock.getQuantity());
     }
 }
