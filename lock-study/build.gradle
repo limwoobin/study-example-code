@@ -21,6 +21,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.redisson:redisson-spring-boot-starter:3.17.4'
+
     runtimeOnly 'mysql:mysql-connector-java'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
