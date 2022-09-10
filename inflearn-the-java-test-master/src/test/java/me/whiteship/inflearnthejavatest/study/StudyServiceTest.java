@@ -46,7 +46,7 @@ class StudyServiceTest {
     @Container
     static DockerComposeContainer composeContainer =
             new DockerComposeContainer(new File("src/test/resources/docker-compose.yml"))
-            .withExposedService("study-db", 5432);
+            .withExposedService("studytest", 5432);
 
     @Test
     void createNewStudy() {
