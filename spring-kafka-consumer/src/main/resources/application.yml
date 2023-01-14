@@ -1,2 +1,9 @@
 server:
   port: 8081
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: test-group
+    topics:
+      exam: exam
