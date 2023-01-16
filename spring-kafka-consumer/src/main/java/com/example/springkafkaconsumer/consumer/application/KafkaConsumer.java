@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 public class KafkaConsumer {
 
     @KafkaListener(
-            topics = "${spring.kafka.topic.exam}"
-            ,groupId = "${spring.kafka.consumer.group-id}"
+            topics = "${spring.kafka.topics.exam}",
+            groupId = "${spring.kafka.consumer.group-id}"
     )
     public void consume(@Payload String message, Acknowledgment ack) {
         log.info("consume message {} ", message);
