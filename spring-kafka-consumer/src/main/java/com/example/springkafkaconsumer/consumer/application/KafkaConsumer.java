@@ -12,10 +12,21 @@ public class KafkaConsumer {
 
     @KafkaListener(
             topics = "${spring.kafka.topics.exam}",
-            groupId = "${spring.kafka.consumer.group-id}"
+            groupId = "${spring.kafka.consumer.group-id}",
+            containerFactory = "containerFactory"
     )
     public void consume(@Payload String message, Acknowledgment ack) {
         log.info("consume message {} ", message);
+        ack.acknowledge();
+    }
+
+    @KafkaListener(
+            topics = "${spring.kafka.topics.exam}",
+            groupId = "${spring.kafka.consumer.group-id}",
+            containerFactory = "jsonContainerFactory"
+    )
+    public void jsonConsume(@Payload TestVO testVO, Acknowledgment ack) {
+        log.info("consume message {} ", testVO);
         ack.acknowledge();
     }
 }
