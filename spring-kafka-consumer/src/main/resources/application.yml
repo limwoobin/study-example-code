@@ -3,8 +3,9 @@ server:
 
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
     consumer:
+      bootstrap-servers: localhost:9092
       group-id: test-group
     topics:
       exam: exam
+      exam2: exam2
