@@ -10,13 +10,24 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class KafkaProducer {
-    @Value("${spring.kafka.topics.exam}")
+    @Value("${spring.kafka.producer.topics.exam}")
     private String examTopic;
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    @Value("${spring.kafka.producer.topics.exam2}")
+    private String exam2Topic;
 
-    public void messageSend() {
-        log.debug("kafka producer : {}", "test123");
-        kafkaTemplate.send(examTopic, "test123");
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, Object> jsonKafkaTemplate;
+
+    public void sendMessage(String message) {
+        log.info("kafka producer : {}", message);
+        kafkaTemplate.send(examTopic, message);
+    }
+
+    public void sendJsonMessage(String message) {
+        TestVO jsonMessage = new TestVO(message, 15);
+
+        log.info("kafka json producer : {}", jsonMessage);
+        jsonKafkaTemplate.send(exam2Topic, jsonMessage);
     }
 }
