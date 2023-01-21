@@ -21,12 +21,12 @@ public class KafkaConsumer {
     }
 
     @KafkaListener(
-            topics = "${spring.kafka.topics.exam}",
+            topics = "${spring.kafka.topics.exam2}",
             groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "jsonContainerFactory"
     )
     public void jsonConsume(@Payload TestVO testVO, Acknowledgment ack) {
-        log.info("consume message {} ", testVO);
+        log.info("jsonConsume message {} ", testVO);
         ack.acknowledge();
     }
 }
