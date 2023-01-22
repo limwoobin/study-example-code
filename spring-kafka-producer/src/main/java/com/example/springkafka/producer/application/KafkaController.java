@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class KafkaController {
 
     private final KafkaProducer kafkaProducer;
+    private final KafkaMessageSender<TestVO> kafkaMessageSender;
 
     @GetMapping(value = "/{message}")
     public ResponseEntity<Void> send(@PathVariable String message) {
@@ -24,6 +25,14 @@ public class KafkaController {
     @GetMapping(value = "/json/{message}")
     public ResponseEntity<Void> sendJson(@PathVariable String message) {
         kafkaProducer.sendJsonMessage(message);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/sender/{message}")
+    public ResponseEntity send2(@PathVariable String message) {
+        TestVO testVO = new TestVO(message, 20);
+
+        kafkaMessageSender.send(testVO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
