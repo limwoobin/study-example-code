@@ -16,6 +16,9 @@ public class KafkaProducer {
     @Value("${spring.kafka.producer.topics.exam2}")
     private String exam2Topic;
 
+    @Value("${spring.kafka.producer.topics.exam4}")
+    private String exam4Topic;
+
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final KafkaTemplate<String, Object> jsonKafkaTemplate;
 
@@ -29,5 +32,12 @@ public class KafkaProducer {
 
         log.info("kafka json producer : {}", jsonMessage);
         jsonKafkaTemplate.send(exam2Topic, jsonMessage);
+    }
+
+    public void sendBatchMessage(String message) {
+        TestVO jsonMessage = new TestVO(message, 15);
+
+        log.info("kafka json producer : {}", jsonMessage);
+        jsonKafkaTemplate.send(exam4Topic, jsonMessage);
     }
 }

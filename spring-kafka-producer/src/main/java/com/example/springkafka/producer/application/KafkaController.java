@@ -29,10 +29,16 @@ public class KafkaController {
     }
 
     @GetMapping(value = "/sender/{message}")
-    public ResponseEntity send2(@PathVariable String message) {
+    public ResponseEntity<Void> send2(@PathVariable String message) {
         TestVO testVO = new TestVO(message, 20);
 
         kafkaMessageSender.send(testVO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/batch/{message}")
+    public ResponseEntity<Void> batchSend(@PathVariable String message) {
+        kafkaProducer.sendBatchMessage(message);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
