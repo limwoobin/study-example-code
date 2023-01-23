@@ -8,6 +8,8 @@ import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @Component
@@ -46,5 +48,21 @@ public class KafkaConsumer {
         );
 
         ack.acknowledge();
+    }
+
+    @KafkaListener(
+            topics = "${spring.kafka.topics.exam4}",
+            groupId = "${spring.kafka.consumer.group-id}",
+            containerFactory = "batchContainerFactory"
+    )
+    public void batchConsumer(@Payload List<TestVO> list, @Headers MessageHeaders messageHeaders) {
+        log.info("batch Consumer message {} {}",
+            kv("batch size", list.size()),
+            kv("headers", messageHeaders)
+        );
+
+        for (TestVO testVO : list) {
+            log.info("consumer data {}", testVO);
+        }
     }
 }
