@@ -89,7 +89,7 @@ public class KafkaConsumerConfig {
     @Bean
     public ConsumerFactory<String, TestVO> batchConsumerFactory() {
         Map<String, Object> config = consumerConfigMap();
-        config.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100");
+        config.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "10");
 
         return new DefaultKafkaConsumerFactory<>(
                 config,

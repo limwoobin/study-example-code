@@ -19,10 +19,16 @@ public class KafkaConsumer {
     @KafkaListener(
             topics = "${spring.kafka.topics.exam}",
             groupId = "${spring.kafka.consumer.group-id}",
-            containerFactory = "containerFactory"
+            containerFactory = "containerFactory",
+            errorHandler = "kafkaErrorHandler"
     )
     public void consume(@Payload String message, Acknowledgment ack) {
         log.info("consume message {} ", message);
+
+        if (true) {
+            throw new RuntimeException("error test");
+        }
+
         ack.acknowledge();
     }
 
