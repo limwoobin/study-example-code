@@ -26,12 +26,15 @@ public class KafkaErrorHandler implements KafkaListenerErrorHandler {
 
     @Override
     public Object handleError(Message<?> message, ListenerExecutionFailedException exception, Consumer<?, ?> consumer) {
-        log.error("[KafkaErrorHandler] {} {}",
+        ConsumerRecord<String, String> record = (ConsumerRecord<String, String>) message.getPayload();
+
+        log.error("[KafkaErrorHandler] {} {} {}",
                 kv("kafkaMessage", message.getPayload()),
-                kv("errorMessage", exception.getMessage())
+                kv("errorMessage", exception.getMessage()),
+                kv("kafka record value", record.value())
         );
 
-        ConsumerRecord<String, String> record = (ConsumerRecord<String, String>) message.getPayload();
+        consumer.commitSync();
         return record.value();
     }
 }
