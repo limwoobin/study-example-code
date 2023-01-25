@@ -6,6 +6,7 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,15 +20,11 @@ public class KafkaConsumer {
     @KafkaListener(
             topics = "${spring.kafka.topics.exam}",
             groupId = "${spring.kafka.consumer.group-id}",
-            containerFactory = "containerFactory",
-            errorHandler = "kafkaErrorHandler"
+            containerFactory = "containerFactory"
     )
+    @SendTo(value = "${spring.kafka.topics.dead-letter}")
     public void consume(@Payload String message, Acknowledgment ack) {
         log.info("consume message {} ", message);
-
-        if (true) {
-            throw new RuntimeException("error test");
-        }
 
         ack.acknowledge();
     }
