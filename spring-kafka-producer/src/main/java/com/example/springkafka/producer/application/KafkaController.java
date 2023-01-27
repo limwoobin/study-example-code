@@ -41,4 +41,10 @@ public class KafkaController {
         kafkaProducer.sendBatchMessage(message);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "/error-topic/{message}")
+    public ResponseEntity<Void> errorTopicSend(@PathVariable String message) {
+        kafkaProducer.sendErrorTopicMessage(message);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -19,6 +19,9 @@ public class KafkaProducer {
     @Value("${spring.kafka.producer.topics.exam4}")
     private String exam4Topic;
 
+    @Value("${spring.kafka.producer.topics.error-test-topic}")
+    private String errorTestTopic;
+
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final KafkaTemplate<String, Object> jsonKafkaTemplate;
 
@@ -39,5 +42,10 @@ public class KafkaProducer {
 
         log.info("kafka json producer : {}", jsonMessage);
         jsonKafkaTemplate.send(exam4Topic, jsonMessage);
+    }
+
+    public void sendErrorTopicMessage(String message) {
+        log.info("kafka error topic send {}", message);
+        kafkaTemplate.send(errorTestTopic, message);
     }
 }
