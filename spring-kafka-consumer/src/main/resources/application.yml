@@ -13,3 +13,5 @@ spring:
       exam4: exam4
       dead-letter: dead-letter
       error-test-topic: error-test-topic
+    producer:
+      bootstrap-servers: localhost:9092
