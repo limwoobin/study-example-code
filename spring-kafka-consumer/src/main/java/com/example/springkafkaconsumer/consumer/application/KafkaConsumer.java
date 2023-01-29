@@ -70,10 +70,8 @@ public class KafkaConsumer {
     @KafkaListener(
             topics = "${spring.kafka.topics.error-test-topic}",
             groupId = "${spring.kafka.consumer.group-id}",
-            containerFactory = "containerFactory",
-            errorHandler = "kafkaErrorHandler"
+            containerFactory = "containerFactory"
     )
-//    @SendTo(value = "${spring.kafka.topics.dead-letter}")
     public void consumeErrorHandlerTopic(@Payload ConsumerRecord<String, String> record, Acknowledgment ack) {
         log.info("consume message {} ", record.toString());
 
