@@ -140,6 +140,7 @@ public class KafkaConsumerConfig {
             log.info("dead letter send success {}", consumerRecord.value());
         }, fixedBackOff);
 
+        // TODO: 2023/02/01 필요시 설정
 //        errorHandler.addRetryableExceptions(SocketTimeoutException.class);    // 재시도 할 수 있는 예외
 //        errorHandler.addNotRetryableExceptions(NullPointerException.class);   // 재시도 할 수 없는 예외
 
