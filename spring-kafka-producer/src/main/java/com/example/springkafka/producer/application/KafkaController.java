@@ -47,4 +47,10 @@ public class KafkaController {
         kafkaProducer.sendErrorTopicMessage(message);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "/record-test-topic/{message}")
+    public ResponseEntity<Void> recordTest(@PathVariable String message) {
+        kafkaProducer.sendRecordTest(message);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

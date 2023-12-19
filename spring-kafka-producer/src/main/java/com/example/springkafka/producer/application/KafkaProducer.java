@@ -22,6 +22,9 @@ public class KafkaProducer {
     @Value("${spring.kafka.producer.topics.error-test-topic}")
     private String errorTestTopic;
 
+    @Value("${spring.kafka.producer.topics.record-test}")
+    private String recordTestTopic;
+
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final KafkaTemplate<String, Object> jsonKafkaTemplate;
 
@@ -47,5 +50,10 @@ public class KafkaProducer {
     public void sendErrorTopicMessage(String message) {
         log.info("kafka error topic send {}", message);
         kafkaTemplate.send(errorTestTopic, message);
+    }
+
+    public void sendRecordTest(String message) {
+        log.info("kafka error topic send {}", message);
+        kafkaTemplate.send(recordTestTopic, message);
     }
 }

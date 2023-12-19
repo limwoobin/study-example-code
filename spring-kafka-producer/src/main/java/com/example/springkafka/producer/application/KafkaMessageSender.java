@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
-import static net.logstash.logback.argument.StructuredArguments.kv;
-
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -39,10 +37,7 @@ public class KafkaMessageSender<T> {
 
             @Override
             public void onSuccess(SendResult<String, T> result) {
-                log.info("Send Message {} {}",
-                        kv("value", result.getProducerRecord().value().toString()),
-                        kv("offset", result.getRecordMetadata().offset())
-                );
+                log.info("Send Message {} {}", result.getProducerRecord().value().toString(), result.getRecordMetadata().offset());
             }
         });
     }
