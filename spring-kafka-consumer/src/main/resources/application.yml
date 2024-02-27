@@ -4,8 +4,9 @@ server:
 spring:
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: localhost:29092
       group-id: test-group
+      auto-offset-reset: earliest
     topics:
       exam: exam
       exam2: exam2
@@ -13,8 +14,9 @@ spring:
       exam4: exam4
       dead-letter: dead-letter
       error-test-topic: error-test-topic
+      record-test: record-test
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: localhost:29092
     backoff:
       interval: 3000
       max_failure: 3
