@@ -65,8 +65,8 @@ public class KafkaConsumerCustomConfig {
   @Bean
   public ConsumerFactory<String, String> customConsumerFactoryV2() {
     Map<String, Object> config = consumerConfigMap();
-        config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+    config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     config.put(ConsumerConfig.CLIENT_ID_CONFIG, "custom_client_v2");
     return new DefaultKafkaConsumerFactory<>(config);
   }
@@ -77,8 +77,26 @@ public class KafkaConsumerCustomConfig {
 
     factory.setConsumerFactory(customConsumerFactoryV2());
     factory.setMessageConverter(recordConverter());
-
     return factory;
   }
 
+  @Bean
+  public ConsumerFactory<String, String> customConsumerFactoryV3() {
+    Map<String, Object> config = consumerConfigMap();
+    config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+    config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+//    config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+    config.put(ConsumerConfig.CLIENT_ID_CONFIG, "custom_client_v3");
+    return new DefaultKafkaConsumerFactory<>(config);
+  }
+
+  @Bean
+  public ConcurrentKafkaListenerContainerFactory<String, String> customContainerFactoryV3() {
+    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+
+    factory.setConsumerFactory(customConsumerFactoryV3());
+    factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+    factory.setMessageConverter(recordConverter());
+    return factory;
+  }
 }

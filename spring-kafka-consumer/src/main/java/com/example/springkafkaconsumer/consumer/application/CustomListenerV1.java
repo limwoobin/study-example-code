@@ -17,7 +17,7 @@ public class CustomListenerV1 {
     groupId = "${spring.kafka.consumer.group-id}",
     containerFactory = "customContainerFactoryV1"
   )
-  public void onMessage(ConsumerRecord<String, TestVO> message, Acknowledgment ack) {
+  public void onMessage_v1(ConsumerRecord<String, TestVO> message, Acknowledgment ack) {
     log.info("partition key: {}", message.key());
     log.info("value: {}", message.value());
     log.info("offset: {}", message.offset());
@@ -29,7 +29,25 @@ public class CustomListenerV1 {
     groupId = "${spring.kafka.consumer.group-id}",
     containerFactory = "customContainerFactoryV2"
   )
-  public void onMessage(ConsumerRecord<String, TestVO> message) {
+  public void onMessage_v2(ConsumerRecord<String, TestVO> message) {
+    if (true) {
+      throw new RuntimeException("runtime exception");
+    }
+
     log.info("message {}", message);
+  }
+
+  @KafkaListener(
+    topics = "${spring.kafka.topics.record-test3}",
+    groupId = "${spring.kafka.consumer.group-id}",
+    containerFactory = "customContainerFactoryV3"
+  )
+  public void onMessage_v3(ConsumerRecord<String, TestVO> message, Acknowledgment ack) {
+    if ("test".equals(message.key())) {
+      throw new RuntimeException("runtime exception");
+    }
+
+    log.info("message {}", message);
+    ack.acknowledge();
   }
 }

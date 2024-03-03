@@ -15,6 +15,7 @@ spring:
       error-test-topic: error-test-topic
       record-test: record-test
       record-test2: record-test2
+      record-test3: record-test3
     producer:
       bootstrap-servers: localhost:29092
     backoff:
