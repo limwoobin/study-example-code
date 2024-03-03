@@ -28,7 +28,6 @@ import org.springframework.util.backoff.FixedBackOff;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.logstash.logback.argument.StructuredArguments.f;
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @EnableKafka
@@ -66,7 +65,6 @@ public class KafkaConsumerConfig {
 
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-//        config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
@@ -122,24 +120,6 @@ public class KafkaConsumerConfig {
     @Bean
     public RecordMessageConverter converter(){
         return new StringJsonMessageConverter(objectMapper);
-    }
-
-    @Bean
-    public ConsumerFactory<String, String> customConsumerFactoryV1() {
-        Map<String, Object> config = consumerConfigMap();
-        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        return new DefaultKafkaConsumerFactory<>(config);
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> customContainerFactoryV1() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-
-        factory.setConsumerFactory(customConsumerFactoryV1());
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
-        factory.setMessageConverter(converter());
-
-        return factory;
     }
 
     @Bean
