@@ -1,0 +1,12 @@
+package org.example.section_03;
+
+public class TerminatedStateThreadExample {
+  public static void main(String[] args) throws InterruptedException {
+    Runnable runnable = () -> System.out.println("TERMINATED STATE !!");
+    Thread thread = new Thread(runnable);
+    thread.start();
+    thread.join();
+
+    System.out.println("state: " + thread.getState());
+  }
+}
