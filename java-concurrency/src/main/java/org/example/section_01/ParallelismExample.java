@@ -1,4 +1,4 @@
-package org.example.section_01.exam01;
+package org.example.section_01;
 
 import java.util.ArrayList;
 import java.util.List;
