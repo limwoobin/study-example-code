@@ -1,4 +1,4 @@
-package org.example.section_03;
+package org.example.section_02.state;
 
 public class TimeWaitingThreadExample {
   public static void main(String[] args) throws InterruptedException {
