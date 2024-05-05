@@ -15,6 +15,6 @@ public class InterruptSleepExample {
     thread.start();
 
     Thread.sleep(1000);
-//    thread.interrupt();
+    thread.interrupt();
   }
 }
