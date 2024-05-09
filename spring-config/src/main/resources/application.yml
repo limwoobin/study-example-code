@@ -1,1 +1,3 @@
-spring.application.name=spring-config
+logging:
+  level:
+    ROOT: DEBUG
