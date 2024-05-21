@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExamComponent {
 
-  @Bean
-  public Exam2 exam2() {
-    return new Exam2();
+  @Bean(name = "exam2")
+  public Exam exam() {
+    return new Exam();
   }
 }

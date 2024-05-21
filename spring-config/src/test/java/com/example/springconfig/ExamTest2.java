@@ -1,7 +1,6 @@
 package com.example.springconfig;
 
 import com.example.springconfig.config.Exam;
-import com.example.springconfig.config.Exam2;
 import com.example.springconfig.config.ExamComponent;
 import com.example.springconfig.config.ExamConfiguration;
 import org.junit.jupiter.api.RepeatedTest;
@@ -23,26 +22,34 @@ public class ExamTest2 {
   @Autowired
   private ApplicationContext applicationContext;
 
-  @RepeatedTest(value = 5)
   @Test
   void configuration_test() {
     Exam exam = examConfiguration.exam();
-    System.out.println("exam: " + exam);
-  }
+    Exam exam2 = examConfiguration.exam();
+    Exam exam3 = examConfiguration.exam();
+    Exam exam4 = examConfiguration.exam();
+    Exam exam5 = examConfiguration.exam();
 
-  @RepeatedTest(value = 5)
-  void component_test() {
-    Exam2 exam2 = examComponent.exam2();
+    System.out.println("exam: " + exam);
     System.out.println("exam2: " + exam2);
+    System.out.println("exam3: " + exam3);
+    System.out.println("exam4: " + exam4);
+    System.out.println("exam5: " + exam5);
   }
 
   @Test
-  void test() {
-    Exam exam = examConfiguration.exam();
-    Exam2 exam2 = examComponent.exam2();
+  void component_test() {
+    Exam exam = examComponent.exam();
+    Exam exam2 = examComponent.exam();
+    Exam exam3 = examComponent.exam();
+    Exam exam4 = examComponent.exam();
+    Exam exam5 = examComponent.exam();
 
-    System.out.println(exam);
-    System.out.println(exam2);
+    System.out.println("exam: " + exam);
+    System.out.println("exam2: " + exam2);
+    System.out.println("exam3: " + exam3);
+    System.out.println("exam4: " + exam4);
+    System.out.println("exam5: " + exam5);
   }
 
   @Test
@@ -58,7 +65,7 @@ public class ExamTest2 {
 
     Object result = applicationContext.getBean("exam");
     Object result2 = applicationContext.getBean("exam2");
-
+//
     System.out.println(result);
     System.out.println(result2);
 
