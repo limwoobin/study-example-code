@@ -1,0 +1,14 @@
+package com.example.springconfig;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class TempTestB {
+
+  @Test
+  void test() {
+
+  }
+
+}
