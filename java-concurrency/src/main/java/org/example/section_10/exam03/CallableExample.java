@@ -3,7 +3,7 @@ package org.example.section_10.exam03;
 import java.util.concurrent.*;
 
 public class CallableExample {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     ExecutorService executorService = Executors.newFixedThreadPool(1);
     Callable<Integer> callableTask = () -> {
       System.out.println(Thread.currentThread().getName() + " Callable 작업 수행중..");
@@ -12,6 +12,7 @@ public class CallableExample {
     };
 
     Future<Integer> future = executorService.submit(callableTask);
+    Thread.sleep(3000);
     int result;
     try {
       result = future.get();
