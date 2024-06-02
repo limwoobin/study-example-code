@@ -28,6 +28,6 @@ public class BlockedStateThreadExample {
     Thread.sleep(100);
 
     System.out.println("state: " + thread.getState());
-    System.out.println("state: " + thread2.getState());
+    System.out.println("state2: " + thread2.getState());
   }
 }
