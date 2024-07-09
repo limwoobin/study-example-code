@@ -16,7 +16,7 @@ public class WaitingStateThreadExample {
 
     Thread thread = new Thread(runnable);
     thread.start();
-    Thread.sleep(100);
+    Thread.sleep(1000);
 
     System.out.println("state: " + thread.getState());
   }
