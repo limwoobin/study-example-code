@@ -4,15 +4,18 @@ import java.util.concurrent.CompletableFuture;
 
 public class CancelTest {
   public static void main(String[] args) throws InterruptedException {
-    CompletableFuture<Integer> cf = CompletableFuture.supplyAsync(() -> {
-      throw new IllegalArgumentException("error");
-//      return 1;
+    Thread thread = new Thread(() -> {
+      try {
+        Thread.sleep(3000);
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+
+      System.out.println("Thread");
     });
-//    cf.cancel(true);
 
-    Thread.sleep(500);
-
-    System.out.println(cf.isCancelled());
-    System.out.println(cf.isCompletedExceptionally());
+    System.out.println("Main Thread Start");
+    thread.start();
+    System.out.println("Main Thread End");
   }
 }
