@@ -1,4 +1,4 @@
-package com.example.springkafkaconsumer.consumer.config;
+package com.example.springkafkaconsumer.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.example.springkafkaconsumer.consumer.config;
+package com.example.springkafkaconsumer.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
