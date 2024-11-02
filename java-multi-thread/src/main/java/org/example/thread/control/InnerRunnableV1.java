@@ -1,4 +1,4 @@
-package org.example.section01;
+package org.example.thread.control;
 
 import static org.example.util.MyLogger.log;
 

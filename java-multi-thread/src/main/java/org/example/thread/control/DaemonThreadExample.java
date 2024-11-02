@@ -1,4 +1,4 @@
-package org.example.section01;
+package org.example.thread.control;
 
 public class DaemonThreadExample {
   public static void main(String[] args) {
