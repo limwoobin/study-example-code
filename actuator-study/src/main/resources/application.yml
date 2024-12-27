@@ -10,3 +10,25 @@ spring:
   jpa:
     database: mysql
     show-sql: true
+
+management:
+#  server:
+#    port: 8081  -> actuator ? ?? ???? ???? ?
+  endpoint:
+    health:
+      show-components: always
+  #      show-details: always
+  info:
+    java:
+      enabled: true
+    os:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
